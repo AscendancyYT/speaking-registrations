@@ -78,3 +78,74 @@
 .container .registration-form .buttons .signUpBtn{
   display: none;
 }
+
+.alerts {
+  position: absolute;
+  top: 120px;
+  right: 30px;
+  width: 400px;
+  min-height: 300px;
+  /* background-color: rgba(0,0,0,0.1); */
+}
+
+.alerts .alert {
+  position: relative;
+  border: none !important;
+  margin-bottom: 8px;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.alerts .alert .icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: -15px;
+  width: 80px;
+  text-align: center;
+}
+
+.alerts .alert .copy {
+  margin-left: 60px;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  line-height: 1.2;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alerts .alert .copy h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+
+.alerts .alert .close {
+  opacity: 1;
+  background-color: #eee;
+  width: 30px;
+  height: 30px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid #333;
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%);
+}
+
+.alerts .alert.alert-success {
+  background-color: #1d9117;
+  color: #eee;
+  cursor: default;
+  box-shadow: 0 0 20px 5px rgba(164, 177, 35, 0.5);
+  display: none;
+}
+.alerts .alert.alert-success .close {
+  color: #1d9117;
+  border-color: #1d9117;
+  cursor: pointer;
+}
