@@ -1,0 +1,80 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+}
+.container{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+.container .registration-form{
+  width: 400px;
+  height: 650px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.container .registration-form input{
+  width: 250px;
+  height: 50px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.container .registration-form .buttons{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container .registration-form .buttons .button{
+  border: 1px solid #000;
+  transition: all .2s linear;
+  cursor: pointer;
+}
+
+.container .registration-form .buttons .button:hover{
+  background-color: #000;
+  color: #fff;
+}
+
+.container .registration-form .buttons .hotSwap{
+  background-color: #000;
+  color: #fff;
+}
+
+.container .registration-form .buttons .hotSwap:hover{
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.container .registration-form .login-only{
+  display: none;
+}
+
+.container .registration-form .buttons .signUpBtn{
+  display: none;
+}
