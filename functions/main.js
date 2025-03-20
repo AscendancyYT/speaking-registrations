@@ -6,7 +6,7 @@
 // ##                                                       ##
 // ###########################################################
 
-let form = document.querySelector(".registration-form")
+let form = document.querySelector(".registration-form");
 let title = document.querySelector(".title");
 let loginTitle = document.querySelector(".lTitle");
 let nameInput = document.querySelector(".nameInput");
@@ -18,63 +18,68 @@ let submitBtn = document.querySelector(".submitBtn");
 let loginBtn = document.querySelector(".loginBtn");
 let signUpBtn = document.querySelector(".signUpBtn");
 let successAlert = document.querySelector(".alert-success");
-let closeBtn = document.querySelector(".close")
+let closeBtn = document.querySelector(".close");
 
 
 // ###########################################################
 // ##                                                       ##
 // ##                                                       ##
-// ##                       Alerts                          ##
+// ##                     Miscellaneous                     ##
 // ##                                                       ##
 // ##                                                       ##
 // ###########################################################
-
 
 closeBtn.onclick = () => {
-  successAlert.style.display = "none"
-}
+  successAlert.style.display = "none";
+};
 
+let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
 
 // ###########################################################
 // ##                                                       ##
 // ##                                                       ##
-// ##                  Checing The Mode                     ##
+// ##                  Checking The Mode                    ##
 // ##                                                       ##
 // ##                                                       ##
 // ###########################################################
-
 
 let isLogin = false;
 
 loginBtn.onclick = () => {
-  if (isLogin == false) {
-    // enabling login mode
+  if (!isLogin) {
     isLogin = true;
-    // switching titles
     title.style.display = "none";
     loginTitle.style.display = "block";
-    // removing unnecessary inputs
+
+    // Disable & hide unnecessary inputs
+    nameInput.disabled = true;
+    surnameInput.disabled = true;
+    confirmPasswordInput.disabled = true;
     nameInput.style.display = "none";
     surnameInput.style.display = "none";
     confirmPasswordInput.style.display = "none";
-    // swaping buttons
+
+    // Swap buttons
     loginBtn.style.display = "none";
     signUpBtn.style.display = "block";
   }
 };
 
 signUpBtn.onclick = () => {
-  if (isLogin == true) {
-    // disabling login mode
+  if (isLogin) {
     isLogin = false;
-    // switching titles
     title.style.display = "block";
     loginTitle.style.display = "none";
-    // adding inputs back
+
+    // Enable & show inputs again
+    nameInput.disabled = false;
+    surnameInput.disabled = false;
+    confirmPasswordInput.disabled = false;
     nameInput.style.display = "block";
     surnameInput.style.display = "block";
     confirmPasswordInput.style.display = "block";
-    // swaping buttons
+
+    // Swap buttons
     loginBtn.style.display = "block";
     signUpBtn.style.display = "none";
   }
@@ -88,17 +93,44 @@ signUpBtn.onclick = () => {
 // ##                                                       ##
 // ###########################################################
 
-form.addEventListener("submit", async function(e) {
+form.addEventListener("submit", async function (e) {
   e.preventDefault();
   let date = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
-  let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
 
   try {
-    // Check if the Telegram username already exists
-    let response = await axios.get(`${DB_API}?candidateTelegram=${telegramInput.value}`);
+    let response = await axios.get(DB_API);
+    let userExists = response.data.some(user => user.candidateTelegram === telegramInput.value);
 
-    if (passwordInput.value === confirmPasswordInput.value && response.data.length === 0) {
-      // Register the user
+    if (isLogin) {
+      // #########################
+      // ##     LOGIN LOGIC     ##
+      // #########################
+      if (!userExists) {
+        alert("User not found!");
+        return;
+      }
+
+      let user = response.data.find(user => user.candidateTelegram === telegramInput.value);
+      if (user.candidatePassword !== passwordInput.value) {
+        alert("Incorrect password!");
+        return;
+      }
+
+      window.location.href = "https://google.com"; // Redirect after login
+    } else {
+      // ###########################
+      // ##   REGISTRATION LOGIC   ##
+      // ###########################
+      if (userExists) {
+        alert("Telegram username already exists!");
+        return;
+      }
+
+      if (passwordInput.value !== confirmPasswordInput.value) {
+        alert("Passwords do not match!");
+        return;
+      }
+
       await axios.post(DB_API, {
         candidateName: nameInput.value,
         candidateSurname: surnameInput.value,
@@ -108,12 +140,11 @@ form.addEventListener("submit", async function(e) {
         candidateExams: []
       });
 
-      successAlert.style.display = "block"
-    } else {
-      alert("We could not register you! Either passwords don't match or Telegram is already registered.");
+      alert("Registration successful!");
+      successAlert.style.display = "block";
     }
   } catch (error) {
-    console.error("Registration failed:", error);
-    alert("Error during registration. Please try again.");
+    console.error("Error:", error);
+    alert("An error occurred! Please try again later.");
   }
 });

@@ -12,29 +12,27 @@
   <div class="container">
     <form class="registration-form">
       <h1 class="title">Register</h1>
-      <h1 class="lTitle login-only">Login</h1>
-      <input type="name" class="nameInput" placeholder="Type Your name Here" required>
-      <input type="surname" class="surnameInput" placeholder="Type Your surname Here" required>
-      <input type="telegramUsername" class="telegramInput" placeholder="Enter Your Telegram Username Here" required>
+      <h1 class="lTitle login-only" style="display: none;">Login</h1>
+      <input type="text" name="name" class="nameInput" placeholder="Type Your Name Here" required>
+      <input type="text" name="surname" class="surnameInput" placeholder="Type Your Surname Here" required>
+      <input type="text" class="telegramInput" placeholder="Enter Your Telegram Username Here" required>
       <input type="password" class="passwordInput" placeholder="Password Here" required>
-      <input type="password" class="confirmPasswordInput" placeholder="Confirm your password Here" required>
+      <input type="password" name="confirmPassword" class="confirmPasswordInput" placeholder="Confirm your password Here" required>
       <div class="buttons">
         <input type="submit" value="Submit" class="submitBtn button">
-        <input type="button" value="LogIn" class="loginBtn button hotSwap">
+        <input type="button" onclick="logIn()" value="LogIn" class="loginBtn button hotSwap">
         <input type="button" value="SignUp" class="signUpBtn button hotSwap">
       </div>
     </form>
     <div class="alerts">
-      <div class="alert alert-success animated bounceInRight">
+      <div class="alert alert-success animated bounceInRight" style="display: none;">
         <div class="icon pull-left">
           <i class='bx bx-candles'></i>
         </div>
         <div class="copy">
           <h4>Success</h4>
         </div>
-        <a class="close">
-          X
-        </a>
+        <a class="close">X</a>
       </div>
     </div>
   </div>  
