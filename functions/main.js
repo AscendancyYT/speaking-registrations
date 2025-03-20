@@ -138,6 +138,13 @@ form.addEventListener("submit", async function (e) {
           registrationDate: date,
           candidateExams: []
         });
+        localStorage.setItem("userStatus", "Admin/Creator");
+        localStorage.setItem("candidateName", nameInput.value);
+        localStorage.setItem("candidateSurname", surnameInput.value);
+        localStorage.setItem("candidateTelegram", telegramInput.value);
+        localStorage.setItem("candidatePassword", passwordInput.value);
+        localStorage.setItem("registrationDate", date);
+
       }else{
         await axios.post(DB_API, {
           status: "Student/TestTaker",
@@ -148,6 +155,12 @@ form.addEventListener("submit", async function (e) {
           registrationDate: date,
           candidateExams: []
         });
+        localStorage.setItem("userStatus", "Student/TestTaker");
+        localStorage.setItem("candidateName", nameInput.value);
+        localStorage.setItem("candidateSurname", surnameInput.value);
+        localStorage.setItem("candidateTelegram", telegramInput.value);
+        localStorage.setItem("candidatePassword", passwordInput.value);
+        localStorage.setItem("registrationDate", date);
       }
 
 
