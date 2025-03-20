@@ -140,8 +140,7 @@ form.addEventListener("submit", async function (e) {
         candidateExams: []
       });
 
-      alert("Registration successful!");
-      successAlert.style.display = "block";
+      window.location.href="https://youtube.com"
     }
   } catch (error) {
     console.error("Error:", error);
