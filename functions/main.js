@@ -105,10 +105,7 @@ form.addEventListener("submit", async function (e) {
       // #########################
       // ##     LOGIN LOGIC     ##
       // #########################
-      if (!userExists) {
-        alert("User not found!");
-        return;
-      }
+
 
       let user = response.data.find(user => user.candidateTelegram === telegramInput.value);
       if (user.candidatePassword !== passwordInput.value) {
@@ -131,14 +128,28 @@ form.addEventListener("submit", async function (e) {
         return;
       }
 
-      await axios.post(DB_API, {
-        candidateName: nameInput.value,
-        candidateSurname: surnameInput.value,
-        candidateTelegram: telegramInput.value,
-        candidatePassword: passwordInput.value,
-        registrationDate: date,
-        candidateExams: []
-      });
+      if(telegramInput.value == "@AzizbekEshimov"){        
+        await axios.post(DB_API, {
+          status: "Admin/Creator",
+          candidateName: nameInput.value,
+          candidateSurname: surnameInput.value,
+          candidateTelegram: telegramInput.value,
+          candidatePassword: passwordInput.value,
+          registrationDate: date,
+          candidateExams: []
+        });
+      }else{
+        await axios.post(DB_API, {
+          status: "Student/TestTaker",
+          candidateName: nameInput.value,
+          candidateSurname: surnameInput.value,
+          candidateTelegram: telegramInput.value,
+          candidatePassword: passwordInput.value,
+          registrationDate: date,
+          candidateExams: []
+        });
+      }
+
 
       window.location.href="https://youtube.com"
     }
