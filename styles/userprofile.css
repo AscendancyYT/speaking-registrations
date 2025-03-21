@@ -28,12 +28,16 @@
 }
 
 .container .profile-top .profile-icon {
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background-color: #000;
   border: 1px solid #fff;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-large;
 }
 
 .container .profile-top .profile-information{
@@ -44,6 +48,23 @@
   justify-content: center;
   color: #fff;
   flex-direction: column;
+}
+
+.container .profile-top .profile-information .name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.container .profile-top .profile-information .name .profile-status{
+  background-color: green;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  border-radius: 10px;
 }
 
 .container .profile-top .profile-information h1{
