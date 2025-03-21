@@ -75,3 +75,35 @@
   color: grey;
   letter-spacing: 2px;
 }
+
+.container .profile-content{
+  width: 100%;
+  height: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container .profile-content .box{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.container .profile-content .data{
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .profile-content .data .candidateName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}

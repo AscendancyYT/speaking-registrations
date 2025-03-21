@@ -18,6 +18,7 @@ let profileIcon = document.querySelector(".profile-icon");
 let profileName = document.querySelector(".profile-name");
 let profileDate = document.querySelector(".profile-date");
 let profileStatus = document.querySelector(".profile-status");
+let nameLabel = document.querySelector(".candidate-name-text");
 
 // ###########################################################
 // ##                                                       ##
