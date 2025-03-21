@@ -1,3 +1,11 @@
+// checking before loading
+
+if(localStorage.getItem("candidateTelegram")){
+  console.log("Everything is fine!");
+}else{
+  window.location.href="../index.html"
+}
+
 // ###########################################################
 // ##                                                       ##
 // ##                                                       ##
@@ -28,4 +36,10 @@ let profileStatusContent = localStorage.getItem("userStatus");
 profileIcon.innerHTML = profileIconContent;
 profileName.innerHTML = profileNameContent;
 profileDate.innerHTML += profileDateContent;
-profileStatus.innerHTML = profileStatusContent
+profileStatus.innerHTML = profileStatusContent;
+
+if(profileStatusContent == "Admin/Creator"){
+  profileStatus.style.background = "red"
+}else{
+  profileStatus.style.background = "green"
+}

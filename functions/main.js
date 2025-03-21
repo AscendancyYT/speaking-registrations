@@ -164,7 +164,7 @@ form.addEventListener("submit", async function (e) {
       }
 
 
-      window.location.href="https://youtube.com"
+      window.location.href="./pages/UserProfile.html"
     }
   } catch (error) {
     console.error("Error:", error);
