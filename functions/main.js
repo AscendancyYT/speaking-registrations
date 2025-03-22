@@ -120,7 +120,7 @@ form.addEventListener("submit", async function (e) {
         return;
       }
 
-      window.location.href = "https://google.com"; // Redirect after login
+      window.location.href = "./pages/UserProfile.html"; // Redirect after login
     } else {
       // ###########################
       // ##   REGISTRATION LOGIC   ##
