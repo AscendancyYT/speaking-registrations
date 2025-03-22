@@ -18,7 +18,10 @@ let profileIcon = document.querySelector(".profile-icon");
 let profileName = document.querySelector(".profile-name");
 let profileDate = document.querySelector(".profile-date");
 let profileStatus = document.querySelector(".profile-status");
-let nameLabel = document.querySelector(".candidate-name-text");
+let nameText = document.querySelector(".candidate-name-text");
+let surnameText = document.querySelector(".candidate-surname-text");
+let telegramText = document.querySelector(".candidate-telegram-text");
+let passwordText = document.querySelector(".candidate-password-text");
 
 // ###########################################################
 // ##                                                       ##
@@ -44,3 +47,8 @@ if(profileStatusContent == "Admin/Creator"){
 }else{
   profileStatus.style.background = "green"
 }
+
+nameText.innerHTML += profileNameContent;
+surnameText.innerHTML += localStorage.getItem("candidateSurname");
+telegramText.innerHTML += localStorage.getItem("candidateTelegram");
+passwordText.innerHTML += localStorage.getItem("candidatePassword")

@@ -20,7 +20,6 @@ let signUpBtn = document.querySelector(".signUpBtn");
 let successAlert = document.querySelector(".alert-success");
 let closeBtn = document.querySelector(".close");
 
-
 // ###########################################################
 // ##                                                       ##
 // ##                                                       ##
@@ -87,7 +86,7 @@ signUpBtn.onclick = () => {
 
 // ###########################################################
 // ##                                                       ##
-// ##                                                       ## 
+// ##                                                       ##
 // ##                     Registration                      ##
 // ##                                                       ##
 // ##                                                       ##
@@ -95,19 +94,27 @@ signUpBtn.onclick = () => {
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
-  let date = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
+  let date =
+    new Date().getDate() +
+    "/" +
+    new Date().getMonth() +
+    "/" +
+    new Date().getFullYear();
 
   try {
     let response = await axios.get(DB_API);
-    let userExists = response.data.some(user => user.candidateTelegram === telegramInput.value);
+    let userExists = response.data.some(
+      (user) => user.candidateTelegram === telegramInput.value
+    );
 
     if (isLogin) {
       // #########################
       // ##     LOGIN LOGIC     ##
       // #########################
 
-
-      let user = response.data.find(user => user.candidateTelegram === telegramInput.value);
+      let user = response.data.find(
+        (user) => user.candidateTelegram === telegramInput.value
+      );
       if (user.candidatePassword !== passwordInput.value) {
         alert("Incorrect password!");
         return;
@@ -128,7 +135,7 @@ form.addEventListener("submit", async function (e) {
         return;
       }
 
-      if(telegramInput.value == "@AzizbekEshimov"){        
+      if (telegramInput.value == "@AzizbekEshimov") {
         await axios.post(DB_API, {
           status: "Admin/Creator",
           candidateName: nameInput.value,
@@ -136,7 +143,8 @@ form.addEventListener("submit", async function (e) {
           candidateTelegram: telegramInput.value,
           candidatePassword: passwordInput.value,
           registrationDate: date,
-          candidateExams: []
+          studentScore: 100,
+          candidateExams: [],
         });
         localStorage.setItem("userStatus", "Admin/Creator");
         localStorage.setItem("candidateName", nameInput.value);
@@ -144,8 +152,8 @@ form.addEventListener("submit", async function (e) {
         localStorage.setItem("candidateTelegram", telegramInput.value);
         localStorage.setItem("candidatePassword", passwordInput.value);
         localStorage.setItem("registrationDate", date);
-
-      }else{
+        localStorage.setItem("studentScore", 100);
+      } else {
         await axios.post(DB_API, {
           status: "Student/TestTaker",
           candidateName: nameInput.value,
@@ -153,7 +161,8 @@ form.addEventListener("submit", async function (e) {
           candidateTelegram: telegramInput.value,
           candidatePassword: passwordInput.value,
           registrationDate: date,
-          candidateExams: []
+          studentScore: 100,
+          candidateExams: [],
         });
         localStorage.setItem("userStatus", "Student/TestTaker");
         localStorage.setItem("candidateName", nameInput.value);
@@ -161,10 +170,10 @@ form.addEventListener("submit", async function (e) {
         localStorage.setItem("candidateTelegram", telegramInput.value);
         localStorage.setItem("candidatePassword", passwordInput.value);
         localStorage.setItem("registrationDate", date);
+        localStorage.setItem("studentScore", 100);
       }
 
-
-      window.location.href="./pages/UserProfile.html"
+      window.location.href = "./pages/UserProfile.html";
     }
   } catch (error) {
     console.error("Error:", error);
