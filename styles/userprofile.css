@@ -11,7 +11,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
   transition: all 0.2s linear;
   padding-left: 80px;
   padding-right: 80px;
@@ -84,6 +84,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 30px;
 }
 
 .container .profile-content .box {
@@ -135,4 +136,28 @@
   padding-right: 20px;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.container .candidate-studentscore{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.container .profile-content .candidate-studentscore .line{
+  width: 1000px;
+  height: 20px;
+  background-color: rgb(32, 32, 32);
+}
+
+.container .profile-content .candidate-studentscore .line .indicator-line{
+  height: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

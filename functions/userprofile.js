@@ -22,6 +22,7 @@ let nameText = document.querySelector(".candidate-name-text");
 let surnameText = document.querySelector(".candidate-surname-text");
 let telegramText = document.querySelector(".candidate-telegram-text");
 let passwordText = document.querySelector(".candidate-password-text");
+let indicatorLine = document.querySelector(".indicator-line");
 
 // ###########################################################
 // ##                                                       ##
@@ -51,4 +52,26 @@ if(profileStatusContent == "Admin/Creator"){
 nameText.innerHTML += profileNameContent;
 surnameText.innerHTML += localStorage.getItem("candidateSurname");
 telegramText.innerHTML += localStorage.getItem("candidateTelegram");
-passwordText.innerHTML += localStorage.getItem("candidatePassword")
+passwordText.innerHTML += localStorage.getItem("candidatePassword");
+
+
+let studentScore = localStorage.getItem("studentScore");
+
+indicatorLine.style.width = studentScore + "%"
+indicatorLine.innerHTML = studentScore + " " + "SC";
+
+if(studentScore > 85){
+  indicatorLine.style.background = "rgb(9,121,32)"
+  indicatorLine.style.background = "linear-gradient(90deg, rgba(9,121,32,1) 11%, rgba(0,255,9,1) 100%)"
+}else if(studentScore > 74){
+  indicatorLine.style.background = "rgb(39,121,9)"
+  indicatorLine.style.background = "linear-gradient(90deg, rgba(39,121,9,1) 11%, rgba(227,255,0,1) 100%)"
+  indicatorLine.style.color = "#000"
+}else if(studentScore > 52){
+  indicatorLine.style.background = "rgb(116,121,9)"
+  indicatorLine.style.background = "linear-gradient(90deg, rgba(116,121,9,1) 11%, rgba(227,255,0,1) 100%)"
+  indicatorLine.style.color = "#000"
+}else if(studentScore > 0){
+  indicatorLine.style.background = "rgb(121,9,9)"
+  indicatorLine.style.background = "linear-gradient(90deg, rgba(121,9,9,1) 11%, rgba(255,0,0,1) 100%)"
+}
