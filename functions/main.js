@@ -113,12 +113,23 @@ form.addEventListener("submit", async function (e) {
       // #########################
 
       let user = response.data.find(
-        (user) => user.candidateTelegram === telegramInput.value
+        (user) => user.candidateTelegram == telegramInput.value
       );
-      if (user.candidatePassword !== passwordInput.value) {
+      if (user.candidatePassword != passwordInput.value) {
         alert("Incorrect password!");
         return;
       }
+
+   
+
+      localStorage.setItem("userStatus", "Admin/Creator");
+      localStorage.setItem("candidateName", user.candidateName);
+      localStorage.setItem("candidateSurname", user.candidateSurname);
+      localStorage.setItem("candidateTelegram", user.candidateTelegram);
+      localStorage.setItem("candidatePassword", user.candidatePassword);
+      localStorage.setItem("registrationDate", user.registrationDate);
+      localStorage.setItem("studentScore", user.studentScore);
+      
 
       window.location.href = "./pages/UserProfile.html"; // Redirect after login
     } else {
