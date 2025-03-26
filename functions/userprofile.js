@@ -1,5 +1,4 @@
 // checking before loading
-
 if (localStorage.getItem("candidateTelegram")) {
   console.log("Everything is fine!");
 } else {
@@ -60,9 +59,9 @@ let studentScore = localStorage.getItem("studentScore");
 indicatorLine.style.width = studentScore + "%";
 indicatorLine.innerHTML = studentScore + " " + "SC";
 
-if (studentScore = 100){
+if (studentScore == 100){
   indicatorLine.style.background="linear-gradient(to right, blue, blueviolet)"
-}else if (studentScore > 85) {
+} else if (studentScore > 85) {
   indicatorLine.style.background = "rgb(9,121,32)";
   indicatorLine.style.background =
     "linear-gradient(90deg, rgba(9,121,32,1) 11%, rgba(0,255,9,1) 100%)";
@@ -80,9 +79,10 @@ if (studentScore = 100){
   indicatorLine.style.background = "rgb(121,9,9)";
   indicatorLine.style.background =
     "linear-gradient(90deg, rgba(121,9,9,1) 11%, rgba(255,0,0,1) 100%)";
-}else{
+} else {
   console.log("what the hail");
 }
+
 let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
 
 async function getUserExams() {
@@ -103,16 +103,64 @@ async function getUserExams() {
     .join(""); 
 }
 
-
-
 async function getStudentList(){
   let students = await axios.get(DB_API);
 
   studentList.innerHTML = students.data
-  .map(student => `<li class="student">#${student.id} -- ${student.candidateName} -- ${student.status}</li>`)
-  .join("") 
+  .map(student => `<li class="student ${student.id}">#${student.id} -- ${student.candidateName} -- ${student.status} -- ${student.studentScore}</li>`)
+  .join("")
 }
-
 
 getUserExams();
 getStudentList();
+
+// ###########################################################
+// ##                                                       ##
+// ##                                                       ##
+// ##      Functionality to Load Clicked Student's Data     ##
+// ##                                                       ##
+// ##                                                       ##
+// ###########################################################
+
+studentList.addEventListener("click", async (event) => {
+  if (event.target.classList.contains("student")) {
+    let studentId = event.target.classList[1]; // Get clicked student's ID
+    let response = await axios.get(DB_API);
+    let student = response.data.find(user => user.id === studentId);
+
+    if (student) {
+      // Store clicked student's data in sessionStorage
+      sessionStorage.setItem("tempCandidateName", student.candidateName);
+      sessionStorage.setItem("tempCandidateSurname", student.candidateSurname);
+      sessionStorage.setItem("tempCandidateTelegram", student.candidateTelegram);
+      sessionStorage.setItem("tempStudentScore", student.studentScore);
+      sessionStorage.setItem("tempStudentStatus", student.status);
+      
+      location.reload(); // Reload page
+    }
+  }
+});
+
+// Check if temporary student data exists and load it
+if (sessionStorage.getItem("tempCandidateName")) {
+  profileName.innerHTML = sessionStorage.getItem("tempCandidateName");
+  nameText.innerHTML = sessionStorage.getItem("tempCandidateName");
+  surnameText.innerHTML = sessionStorage.getItem("tempCandidateSurname");
+  telegramText.innerHTML = sessionStorage.getItem("tempCandidateTelegram");
+  profileStatus.innerHTML = sessionStorage.getItem("tempStudentStatus")
+  passwordText.innerHTML = "************"
+  
+  let tempScore = sessionStorage.getItem("tempStudentScore");
+  indicatorLine.style.width = tempScore + "%";
+  indicatorLine.innerHTML = tempScore + " SC";
+  
+  // Remove temp data after displaying
+  setTimeout(() => {
+    sessionStorage.removeItem("tempCandidateName");
+    sessionStorage.removeItem("tempCandidateSurname");
+    sessionStorage.removeItem("tempCandidateTelegram");
+    sessionStorage.removeItem("tempStudentScore");
+    profileStatus.innerHTML = sessionStorage.getItem("tempStudentStatus")
+    location.reload(); // Reload back to the owner's profile
+  }, 10000); // Show student's data for 10 seconds, then return
+}
