@@ -189,8 +189,44 @@
   align-items: center;
   justify-content: center;
   background: rgba(39, 255, 27, 0.759);
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  background: linear-gradient(to right, blue, blueviolet);
   color: #fff;
   font-size: x-large;
   cursor: pointer;
+}
+
+.container .student-list-box{
+  width: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container .student-list-box .student-list{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.container .student-list-box .student-list .student{
+  width: 1000px;
+  height: 50px;
+  background-color: rgb(32, 32, 32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: larger;
+  transition: all .2s linear;
+}
+
+.container .student-list-box .student-list .student:hover{
+  border-radius: 10px;
+  background: linear-gradient(to right, blue, blueviolet);
 }

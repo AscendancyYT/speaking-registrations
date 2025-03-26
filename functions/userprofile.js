@@ -24,6 +24,7 @@ let telegramText = document.querySelector(".candidate-telegram-text");
 let passwordText = document.querySelector(".candidate-password-text");
 let indicatorLine = document.querySelector(".indicator-line");
 let examlist = document.querySelector(".registered-exams-list");
+let studentList = document.querySelector(".student-list");
 
 // ###########################################################
 // ##                                                       ##
@@ -59,7 +60,9 @@ let studentScore = localStorage.getItem("studentScore");
 indicatorLine.style.width = studentScore + "%";
 indicatorLine.innerHTML = studentScore + " " + "SC";
 
-if (studentScore > 85) {
+if (studentScore = 100){
+  indicatorLine.style.background="linear-gradient(to right, blue, blueviolet)"
+}else if (studentScore > 85) {
   indicatorLine.style.background = "rgb(9,121,32)";
   indicatorLine.style.background =
     "linear-gradient(90deg, rgba(9,121,32,1) 11%, rgba(0,255,9,1) 100%)";
@@ -77,10 +80,12 @@ if (studentScore > 85) {
   indicatorLine.style.background = "rgb(121,9,9)";
   indicatorLine.style.background =
     "linear-gradient(90deg, rgba(121,9,9,1) 11%, rgba(255,0,0,1) 100%)";
+}else{
+  console.log("what the hail");
 }
 let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
 
-async function getuser() {
+async function getUserExams() {
   let response = await axios.get(DB_API);
   let user = response.data.find(
     (user) => user.candidateTelegram === localStorage.getItem("candidateTelegram")
@@ -98,4 +103,16 @@ async function getuser() {
     .join(""); 
 }
 
-getuser();
+
+
+async function getStudentList(){
+  let students = await axios.get(DB_API);
+
+  studentList.innerHTML = students.data
+  .map(student => `<li class="student">#${student.id} -- ${student.candidateName} -- ${student.status}</li>`)
+  .join("") 
+}
+
+
+getUserExams();
+getStudentList();

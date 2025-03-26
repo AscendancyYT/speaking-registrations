@@ -17,8 +17,6 @@ let confirmPasswordInput = document.querySelector(".confirmPasswordInput");
 let submitBtn = document.querySelector(".submitBtn");
 let loginBtn = document.querySelector(".loginBtn");
 let signUpBtn = document.querySelector(".signUpBtn");
-let successAlert = document.querySelector(".alert-success");
-let closeBtn = document.querySelector(".close");
 
 // ###########################################################
 // ##                                                       ##
@@ -28,9 +26,7 @@ let closeBtn = document.querySelector(".close");
 // ##                                                       ##
 // ###########################################################
 
-closeBtn.onclick = () => {
-  successAlert.style.display = "none";
-};
+
 
 let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
 
