@@ -212,6 +212,8 @@
       text-align: center;
   }
 
+
+
   .container .profile-top .profile-icon {
     display: none;
   }
@@ -289,6 +291,10 @@
   .container .student-list-box .student-list .student {
     width: 100%;
   }
+
+  .container .profile-top .profile-information .name .profile-status{
+    width: 120px !important;
+  }
 }
 
 /* Small mobile screens */
@@ -328,5 +334,8 @@
 
   .container .student-list-box .student-list .student {
     font-size: 14px;
+  }
+  .container .profile-top .profile-information .name .profile-status{
+    width: 120px !important;
   }
 }
