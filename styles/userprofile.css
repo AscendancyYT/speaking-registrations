@@ -198,3 +198,135 @@
   border-radius: 10px;
   background: linear-gradient(to right, blue, blueviolet);
 }
+
+
+/* Tablets and small screens */
+@media (max-width: 1024px) {
+  .container {
+    padding: 40px;
+  }
+
+  .container .profile-top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .container .profile-top .profile-icon {
+    display: none;
+  }
+
+  .container .profile-top .profile-information {
+    width: 100%;
+    align-items: center;
+  }
+
+  .container .profile-top .profile-information h1 {
+    font-size: 40px;
+  }
+
+  .container .profile-content .data .data-item {
+    width: 90%;
+  }
+
+  .container .profile-content .data .data-item .data-item-text {
+    width: calc(100% - 120px);
+  }
+
+  .container .profile-content .candidate-studentscore .line {
+    width: 90%;
+  }
+
+  .container .student-list-box .student-list .student {
+    width: 90%;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .container .profile-top .profile-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .container .profile-top .profile-information h1 {
+    font-size: 30px;
+  }
+
+  .container .profile-top .profile-information .name .profile-status {
+    width: 100px;
+    font-size: 14px;
+  }
+
+  .container .profile-content .data .data-item {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .container .profile-content .data .data-item .data-item-label {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+
+  .container .profile-content .data .data-item .data-item-text {
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+
+  .container .profile-content .candidate-studentscore .line {
+    width: 100%;
+  }
+
+  .container .student-list-box .student-list .student {
+    width: 100%;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .container .profile-top .profile-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .container .profile-top .profile-information h1 {
+    font-size: 24px;
+  }
+
+  .container .profile-top .profile-information .name {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .container .profile-top .profile-information .name .profile-status {
+    width: 80px;
+    font-size: 12px;
+  }
+
+  .container .profile-content .data .data-item .data-item-label,
+  .container .profile-content .data .data-item .data-item-text {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .container .profile-content .candidate-studentscore .line {
+    height: 15px;
+  }
+
+  .container .student-list-box .student-list .student {
+    font-size: 14px;
+  }
+}

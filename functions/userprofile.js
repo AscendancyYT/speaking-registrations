@@ -58,7 +58,7 @@ async function getStudentScore() {
   indicatorLine.style.width = student.studentScore + "%";
   indicatorLine.innerHTML = student.studentScore + " SC";
 
-  if (student.studentScore == 100) {
+  if (sc >= 100) {
     indicatorLine.style.background = "linear-gradient(to right, blue, blueviolet)";
   } else if (sc > 85) {
     indicatorLine.style.background = "rgb(9,121,32)";
@@ -128,7 +128,7 @@ if (sessionStorage.getItem("tempCandidateName")) {
 
   indicatorLine.style.width = tempScore + "%";
 
-  if (tempScore == 100) {
+  if (tempScore >= 100) {
     indicatorLine.style.background = "linear-gradient(to right, blue, blueviolet)";
   } else if (tempScore > 85) {
     indicatorLine.style.background = "rgb(9,121,32)";
