@@ -328,6 +328,10 @@
     padding: 5px;
   }
 
+  .container .profile-content .data .data-item .data-item-text{
+    padding-left: 20px;    
+  }
+
   .container .profile-content .candidate-studentscore .line {
     height: 15px;
   }
