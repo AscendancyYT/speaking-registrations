@@ -1,3 +1,5 @@
+let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
+
 // checking before loading
 if (localStorage.getItem("candidateTelegram")) {
   console.log("Everything is fine!");
@@ -46,47 +48,38 @@ surnameText.innerHTML += localStorage.getItem("candidateSurname");
 telegramText.innerHTML += localStorage.getItem("candidateTelegram");
 passwordText.innerHTML += localStorage.getItem("candidatePassword");
 
-let studentScore = localStorage.getItem("studentScore");
+async function getStudentScore() {
+  let response = await axios(DB_API)
 
-indicatorLine.style.width = studentScore + "%";
-indicatorLine.innerHTML = studentScore + " SC";
+  let student = response.data.find(user => user.candidateTelegram === localStorage.getItem("candidateTelegram"));
 
-if (studentScore == 100) {
-  indicatorLine.style.background = "linear-gradient(to right, blue, blueviolet)";
-} else if (studentScore > 85) {
-  indicatorLine.style.background = "rgb(9,121,32)";
-  indicatorLine.style.background = "linear-gradient(90deg, rgba(9,121,32,1) 11%, rgba(0,255,9,1) 100%)";
-} else if (studentScore > 74) {
-  indicatorLine.style.background = "rgb(39,121,9)";
-  indicatorLine.style.background = "linear-gradient(90deg, rgba(39,121,9,1) 11%, rgba(227,255,0,1) 100%)";
-  indicatorLine.style.color = "#000";
-} else if (studentScore > 52) {
-  indicatorLine.style.background = "rgb(116,121,9)";
-  indicatorLine.style.background = "linear-gradient(90deg, rgba(116,121,9,1) 11%, rgba(227,255,0,1) 100%)";
-  indicatorLine.style.color = "#000";
-} else if (studentScore > 0) {
-  indicatorLine.style.background = "rgb(121,9,9)";
-  indicatorLine.style.background = "linear-gradient(90deg, rgba(121,9,9,1) 11%, rgba(255,0,0,1) 100%)";
-} else {
-  console.log("what the hail");
-}
+  let sc = student.studentScore
 
-let DB_API = "https://67c8964c0acf98d07087272b.mockapi.io/users";
+  indicatorLine.style.width = student.studentScore + "%";
+  indicatorLine.innerHTML = student.studentScore + " SC";
 
-async function getUserExams(userTelegram) {
-  let response = await axios.get(DB_API);
-  let user = response.data.find((user) => user.candidateTelegram === userTelegram);
-
-  if (!user || !Array.isArray(user.candidateExams)) {
-    console.error("No exams found");
-    examlist.innerHTML = "<li class='exam'>No exams registered</li>";
-    return;
+  if (student.studentScore == 100) {
+    indicatorLine.style.background = "linear-gradient(to right, blue, blueviolet)";
+  } else if (sc > 85) {
+    indicatorLine.style.background = "rgb(9,121,32)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(9,121,32,1) 11%, rgba(0,255,9,1) 100%)";
+  } else if (sc > 74) {
+    indicatorLine.style.background = "rgb(39,121,9)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(39,121,9,1) 11%, rgba(227,255,0,1) 100%)";
+    indicatorLine.style.color = "#000";
+  } else if (sc > 52) {
+    indicatorLine.style.background = "rgb(116,121,9)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(116,121,9,1) 11%, rgba(227,255,0,1) 100%)";
+    indicatorLine.style.color = "#000";
+  } else if (sc > 0) {
+    indicatorLine.style.background = "rgb(121,9,9)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(121,9,9,1) 11%, rgba(255,0,0,1) 100%)";
+  } else {
+    console.log("what the hail");
   }
-
-  examlist.innerHTML = user.candidateExams
-    .map(exam => `<li class="exam">${exam.examTitle}</li>`)
-    .join("");
 }
+
+getStudentScore()
 
 async function getStudentList() {
   let students = await axios.get(DB_API);
@@ -96,8 +89,6 @@ async function getStudentList() {
     .join("");
 }
 
-// Load the current user's exams
-getUserExams(localStorage.getItem("candidateTelegram"));
 getStudentList();
 
 // ###########################################################
@@ -126,29 +117,48 @@ studentList.addEventListener("click", async (event) => {
 
 // Check if temporary student data exists and load it
 if (sessionStorage.getItem("tempCandidateName")) {
+  let tempScore = sessionStorage.getItem("tempStudentScore");
   profileName.innerHTML = sessionStorage.getItem("tempCandidateName");
   nameText.innerHTML = sessionStorage.getItem("tempCandidateName");
   surnameText.innerHTML = sessionStorage.getItem("tempCandidateSurname");
   telegramText.innerHTML = sessionStorage.getItem("tempCandidateTelegram");
-  profileStatus.innerHTML = sessionStorage.getItem("tempStudentStatus");
   passwordText.innerHTML = "************";
   profileDate.innerHTML = "Beloved user Since: " + sessionStorage.getItem("tempStudentRegistrationDate");
-
-  let tempScore = sessionStorage.getItem("tempStudentScore");
-  indicatorLine.style.width = tempScore + "%";
   indicatorLine.innerHTML = tempScore + " SC";
 
-  // Load exams for the selected student
-  getUserExams(sessionStorage.getItem("tempCandidateTelegram"));
+  indicatorLine.style.width = tempScore + "%";
+
+  if (tempScore == 100) {
+    indicatorLine.style.background = "linear-gradient(to right, blue, blueviolet)";
+  } else if (tempScore > 85) {
+    indicatorLine.style.background = "rgb(9,121,32)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(9,121,32,1) 11%, rgba(0,255,9,1) 100%)";
+  } else if (tempScore > 74) {
+    indicatorLine.style.background = "rgb(39,121,9)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(39,121,9,1) 11%, rgba(227,255,0,1) 100%)";
+    indicatorLine.style.color = "#000";
+  } else if (tempScore > 52) {
+    indicatorLine.style.background = "rgb(116,121,9)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(116,121,9,1) 11%, rgba(227,255,0,1) 100%)";
+    indicatorLine.style.color = "#000";
+  } else if (tempScore > 0) {
+    indicatorLine.style.background = "rgb(121,9,9)";
+    indicatorLine.style.background = "linear-gradient(90deg, rgba(121,9,9,1) 11%, rgba(255,0,0,1) 100%)";
+  } else {
+    console.log("what the hail");
+  }
 
   // Remove temp data after displaying
   setTimeout(() => {
     sessionStorage.removeItem("tempCandidateName");
     sessionStorage.removeItem("tempCandidateSurname");
     sessionStorage.removeItem("tempCandidateTelegram");
-    sessionStorage.removeItem("tempStudentScore");
     sessionStorage.removeItem("tempStudentRegistrationDate");
     sessionStorage.removeItem("tempStudentStatus");
+    sessionStorage.removeItem("tempStudentScore");
     location.reload(); // Reload back to the owner's profile
   }, 10000); // Show student's data for 10 seconds, then return
 }
+
+
+// admin only feature to adjust sc

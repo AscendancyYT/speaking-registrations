@@ -1,3 +1,7 @@
+if(localStorage.getItem("candidateTelegram")){
+  alert("Be sure that you already have an accaunt")
+}
+
 // ###########################################################
 // ##                                                       ##
 // ##                                                       ##
@@ -125,8 +129,6 @@ form.addEventListener("submit", async function (e) {
       localStorage.setItem("candidatePassword", user.candidatePassword);
       localStorage.setItem("registrationDate", user.registrationDate);
       localStorage.setItem("studentScore", user.studentScore);
-      
-
       window.location.href = "./pages/UserProfile.html"; // Redirect after login
     } else {
       // ###########################
@@ -151,7 +153,6 @@ form.addEventListener("submit", async function (e) {
           candidatePassword: passwordInput.value,
           registrationDate: date,
           studentScore: 100,
-          candidateExams: [],
         });
         localStorage.setItem("userStatus", "Admin/Creator");
         localStorage.setItem("candidateName", nameInput.value);
@@ -169,7 +170,6 @@ form.addEventListener("submit", async function (e) {
           candidatePassword: passwordInput.value,
           registrationDate: date,
           studentScore: 100,
-          candidateExams: [],
         });
         localStorage.setItem("userStatus", "Student/TestTaker");
         localStorage.setItem("candidateName", nameInput.value);
